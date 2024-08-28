@@ -1,60 +1,106 @@
 import java.util.*;
- 
-public class BankAccount 
+class Account
 {
-    static double balance=1000;
-   static void withdraw(double w)
-    {
-        System.out.print("ENTER AMOUNT TO WITHDRAW : ");
-         double withdraw=w;
-        if(balance>=withdraw)
-        {
-            balance=balance-withdraw;
-            System.out.println("AMOUNT WITHDRAWL : "+withdraw);
+    int top;
+    int size=10;
+    int stack[]=new int[size];
 
-            System.out.println("THANKING FOR USING OUR BANK");
+    void push(int x)
+    {
+        if(top==size-1)
+        {
+            System.out.println("overflow");
         }
         else
         {
-            System.out.println("INSUFFICIENT BALANCE");
+            top++;
+            stack[top]=x;
+            
         }
     }
-    static void deposit(double d)
+     void pop()
     {
-        System.out.println("AMOUNT TO BE DEPOSIT : "+d);
-        balance=balance+d;
+        if(top==-1)
+        {
+            System.out.println("underflow!");
+        }
+        else 
+        {
+        int temp=stack[top];
+        System.out.println("ITEM TO BE POPED : "+temp);
+        top--;
     }
-    static void check()
+}
+    void peek()
     {
-    System.out.println("CURRENT BALANCE : "+balance);
+        if(top==-1)
+        {
+            System.out.println("UNDERFLOW!");
+        }
+        else
+        {
+            System.out.println(stack[top]);
+        }
     }
+    void display()
+    {
+        if(top==-1)
+        {
+            System.out.println("UNDERFLOW!");
+        }
+        else
+        {
+            for(int i=0;i<=top;i++)
+            {
+                System.out.println(stack[i]);
+            }
+        }
+    }
+    void initial()
+{
+     top=-1;
+}
+}
+ 
+ 
+public class BankAccount 
+{
+    
+   
     public static void main(String[] args) 
     {
        Scanner in=new Scanner(System.in);
-       double withdraw,d;
+       Account obj=new Account();
+       int x;
        boolean loop=true;
        while(loop==true)
        {
-       System.out.println("CHOOSE FROM THE FOLLOWING OPERATION : \n 1 : CHECK BALANCE \n 2 : DEPOSIT \n 3 : WITHDRAW");
+       System.out.println("CHOOSE FROM THE FOLLOWING OPERATION : \n 1 : PUSH  \n 2 : POP \n 3 : PEEK \n 4 : DISPLAY");
        int c=in.nextInt();
        switch (c) {
         case 1:
-            check();
+        {
+        System.out.print("ENTER THE VALUE YOU WANT TO ENTER : ");
+          x=in.nextInt();
+            obj.push(x);
             break;
+        }
        case 2:
        {
-          System.out.print("ENTER THE AMOUNT YOU WANT TO DEPOSIT : ");
-          d=in.nextDouble();
-           deposit(d);
+          
+           obj.pop();
            break;
        }
        case 3:
        {
-          System.out.print("ENTER THE AMOUNT YOU WANT TO WITHDRAW : ");
-          withdraw=in.nextDouble();
-           withdraw(withdraw);
+          
+           obj.peek();
            break;
        }
+       case 4:
+        {
+            obj.display();
+        }
         default:
             break;
        }
